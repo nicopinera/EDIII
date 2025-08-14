@@ -1,6 +1,6 @@
 # Prerequisites
 *.d
-
+*.vscode
 # Object files
 *.o
 *.ko
@@ -53,3 +53,4 @@ dkms.conf
 
 # debug information files
 *.dwo
+/Debug/
