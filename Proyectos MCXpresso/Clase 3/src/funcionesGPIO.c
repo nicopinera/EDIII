@@ -56,19 +56,19 @@ void configurarGPIO(uint8_t puerto, uint8_t pin, uint8_t IO){
 void setteoGPIO(uint8_t puerto, uint8_t pin){
 	switch(puerto){
 	case 0:
-		LPC_GPIO0->FIOSET = (IO<<pin);
+		LPC_GPIO0->FIOSET = (1<<pin);
 		break;
 	case 1:
-		LPC_GPIO1->FIOSET = (IO<<pin);
+		LPC_GPIO1->FIOSET = (1<<pin);
 		break;
 	case 2:
-		LPC_GPIO2->FIOSET = (IO<<pin);
+		LPC_GPIO2->FIOSET = (1<<pin);
 		break;
 	case 3:
-		LPC_GPIO3->FIOSET = (IO<<pin);
+		LPC_GPIO3->FIOSET = (1<<pin);
 		break;
 	case 4:
-		LPC_GPIO4->FIOSET = (IO<<pin);
+		LPC_GPIO4->FIOSET = (1<<pin);
 		break;
 	}
 }
