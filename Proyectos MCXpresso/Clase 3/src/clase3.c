@@ -34,7 +34,7 @@ void configGPIO(){
 	LPC_PINCON->PINSEL0 =0; //~(0XFF)
 	LPC_PINCON->PINSEL1 =0;
 
-	//ENTRADA P0.0 AL P0.3 Y EL P0.22 COMO ENTRADA
+	//ENTRADA P0.0 AL P0.3 Y EL P0.22 COMO SALIDA
 	LPC_GPIO0 -> FIODIR &= (~(0b1111)|(1<<22));
 }
 
@@ -52,10 +52,10 @@ void prender(uint8_t numero){
 	prendido = delay * porcentaje;
 	apagado = delay - prendido;
 
-	LPC_GPIO0->FIOSET = (1<<22);
+	LPC_GPIO0->FIOCLR = (1<<22); // SE PRENDE POR BAJO
 	for(uint32_t i = 0;i<prendido;i++);
 
-	LPC_GPIO0->FIOCLR = (1<<22);
+	LPC_GPIO0->FIOSET = (1<<22); //SE APAGA POR ALTO
 	for(uint32_t i = 0;i<apagado;i++);
 
 }
