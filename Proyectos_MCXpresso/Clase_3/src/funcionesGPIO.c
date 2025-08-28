@@ -52,6 +52,7 @@ void configurarGPIO(uint8_t puerto, uint8_t pin, uint8_t IO){
 		}
 		break;
 	}
+	// Falta verificar que pines son validos para cada puerto
 }
 void setteoGPIO(uint8_t puerto, uint8_t pin){
 	switch(puerto){
@@ -70,6 +71,7 @@ void setteoGPIO(uint8_t puerto, uint8_t pin){
 	case 4:
 		LPC_GPIO4->FIOSET = (1<<pin);
 		break;
+		//default
 	}
 }
 uint8_t statusGPIO(uint8_t puerto, uint8_t pin){
@@ -90,6 +92,7 @@ uint8_t statusGPIO(uint8_t puerto, uint8_t pin){
 	case 4:
 		estadoPin = (LPC_GPIO4->FIOPIN >> pin)& 1;
 		break;
+	//default
 	}
 	return estadoPin;
 }
