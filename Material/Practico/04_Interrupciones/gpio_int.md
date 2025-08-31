@@ -1,7 +1,9 @@
 # Interrupciones de GPIO en Microcontroladores
 
 ## Documentación de Referencia
+
 Para información detallada, consultar:
+
 - Capítulo 9 y 3 del User Manual
 
 ## Conceptos Fundamentales
@@ -12,7 +14,6 @@ Las interrupciones de GPIO se clasifican en dos categorías principales:
 
 1. **Interrupciones usando puertos estándar**: Cualquier pin de los puertos 0 y 2
 2. **Interrupciones usando pines externos dedicados**: Pines específicos de interrupciones externas
-
 
 ## Interrupciones de GPIO0 y GPIO2
 
@@ -31,32 +32,33 @@ Las interrupciones de GPIO se clasifican en dos categorías principales:
 
 ### Tabla 103: Mapa de Registros de Interrupciones GPIO
 
-| Nombre | Descripción | Acceso | Reset | Dirección |
-|--------|-------------|---------|--------|-----------|
-| IntEnR | GPIO Interrupt Enable for Rising edge | R/W | 0 | IO0IntEnR: 0x4002 8090<br>IO2IntEnR: 0x4002 80B0 |
-| IntEnF | GPIO Interrupt Enable for Falling edge | R/W | 0 | IO0IntEnF: 0x4002 8094<br>IO2IntEnF: 0x4002 80B4 |
-| IntStatR | GPIO Interrupt Status for Rising edge | RO | 0 | IO0IntStatR: 0x4002 8084<br>IO2IntStatR: 0x4002 80A4 |
-| IntStatF | GPIO Interrupt Status for Falling edge | RO | 0 | IO0IntStatF: 0x4002 8088<br>IO2IntStatF: 0x4002 80A8 |
-| IntClr | GPIO Interrupt Clear | WO | 0 | IO0IntClr: 0x4002 808C<br>IO2IntClr: 0x4002 80AC |
-| IntStatus | GPIO overall Interrupt Status | RO | 0 | IOIntStatus: 0x4002 8080 |
+| Nombre    | Descripción                            | Acceso | Reset | Dirección                                            |
+| --------- | -------------------------------------- | ------ | ----- | ---------------------------------------------------- |
+| IntEnR    | GPIO Interrupt Enable for Rising edge  | R/W    | 0     | IO0IntEnR: 0x4002 8090<br>IO2IntEnR: 0x4002 80B0     |
+| IntEnF    | GPIO Interrupt Enable for Falling edge | R/W    | 0     | IO0IntEnF: 0x4002 8094<br>IO2IntEnF: 0x4002 80B4     |
+| IntStatR  | GPIO Interrupt Status for Rising edge  | RO     | 0     | IO0IntStatR: 0x4002 8084<br>IO2IntStatR: 0x4002 80A4 |
+| IntStatF  | GPIO Interrupt Status for Falling edge | RO     | 0     | IO0IntStatF: 0x4002 8088<br>IO2IntStatF: 0x4002 80A8 |
+| IntClr    | GPIO Interrupt Clear                   | WO     | 0     | IO0IntClr: 0x4002 808C<br>IO2IntClr: 0x4002 80AC     |
+| IntStatus | GPIO overall Interrupt Status          | RO     | 0     | IOIntStatus: 0x4002 8080                             |
 
-*Nota: El valor de reset refleja el estado almacenado solo en bits usados. No incluye contenido de bits reservados.*
+_Nota: El valor de reset refleja el estado almacenado solo en bits usados. No incluye contenido de bits reservados._
 
 Para más detalles sobre estos registros, consultar la sección 9.5.6 del User Manual.
 
 ### Descripción Detallada de Registros
 
 #### IOIntStatus (0x4002 8080)
+
 **Registro de solo lectura** que indica la presencia de interrupciones pendientes en todos los puertos que soportan interrupciones. Requiere solo un bit por cada puerto.
 
 **Tabla 114: GPIO Overall Interrupt Status Register**
 
-| Bit | Símbolo | Descripción | Reset |
-|-----|---------|-------------|--------|
-| 0 | P0Int | Port 0 GPIO interrupt pending<br>• 0: No hay interrupciones pendientes<br>• 1: Al menos una interrupción pendiente | 0 |
-| 1 | - | Reservado (no definido) | NA |
-| 2 | P2Int | Port 2 GPIO interrupt pending<br>• 0: No hay interrupciones pendientes<br>• 1: Al menos una interrupción pendiente | 0 |
-| 31:2 | - | Reservado (no definido) | NA |
+| Bit  | Símbolo | Descripción                                                                                                        | Reset |
+| ---- | ------- | ------------------------------------------------------------------------------------------------------------------ | ----- |
+| 0    | P0Int   | Port 0 GPIO interrupt pending<br>• 0: No hay interrupciones pendientes<br>• 1: Al menos una interrupción pendiente | 0     |
+| 1    | -       | Reservado (no definido)                                                                                            | NA    |
+| 2    | P2Int   | Port 2 GPIO interrupt pending<br>• 0: No hay interrupciones pendientes<br>• 1: Al menos una interrupción pendiente | 0     |
+| 31:2 | -       | Reservado (no definido)                                                                                            | NA    |
 
 #### IO0IntEnR - IO2IntEnR (Habilitación por Flanco Ascendente)
 
@@ -64,14 +66,14 @@ Cada bit habilita la interrupción por flanco de subida para el pin correspondie
 
 **Tabla 115: GPIO Interrupt Enable for Rising Edge (IO0IntEnR - 0x4002 8090)**
 
-| Bit | Símbolo | Descripción | Reset |
-|-----|---------|-------------|--------|
-| 0 | P0.0ER | Enable rising edge interrupt for P0.0<br>• 0: Deshabilitado<br>• 1: Habilitado | 0 |
-| 1 | P0.1ER | Enable rising edge interrupt for P0.1 | 0 |
-| 2 | P0.2ER | Enable rising edge interrupt for P0.2 | 0 |
-| ... | ... | ... | ... |
-| 15 | P0.15ER | Enable rising edge interrupt for P0.15 | 0 |
-| 16 | P0.16ER | Enable rising edge interrupt for P0.16 | 0 |
+| Bit | Símbolo | Descripción                                                                    | Reset |
+| --- | ------- | ------------------------------------------------------------------------------ | ----- |
+| 0   | P0.0ER  | Enable rising edge interrupt for P0.0<br>• 0: Deshabilitado<br>• 1: Habilitado | 0     |
+| 1   | P0.1ER  | Enable rising edge interrupt for P0.1                                          | 0     |
+| 2   | P0.2ER  | Enable rising edge interrupt for P0.2                                          | 0     |
+| ... | ...     | ...                                                                            | ...   |
+| 15  | P0.15ER | Enable rising edge interrupt for P0.15                                         | 0     |
+| 16  | P0.16ER | Enable rising edge interrupt for P0.16                                         | 0     |
 
 #### IO0IntEnF - IO2IntEnF (Habilitación por Flanco Descendente)
 
@@ -79,13 +81,13 @@ Cada bit habilita la interrupción por flanco de bajada para el pin correspondie
 
 **Tabla 117: GPIO Interrupt Enable for Falling Edge (IO0IntEnF - 0x4002 8094)**
 
-| Bit | Símbolo | Descripción | Reset |
-|-----|---------|-------------|--------|
-| 0 | P0.0EF | Enable falling edge interrupt for P0.0<br>• 0: Deshabilitado<br>• 1: Habilitado | 0 |
-| 1 | P0.1EF | Enable falling edge interrupt for P0.1 | 0 |
-| ... | ... | ... | ... |
-| 15 | P0.15EF | Enable falling edge interrupt for P0.15 | 0 |
-| 16 | P0.16EF | Enable falling edge interrupt for P0.16 | 0 |
+| Bit | Símbolo | Descripción                                                                     | Reset |
+| --- | ------- | ------------------------------------------------------------------------------- | ----- |
+| 0   | P0.0EF  | Enable falling edge interrupt for P0.0<br>• 0: Deshabilitado<br>• 1: Habilitado | 0     |
+| 1   | P0.1EF  | Enable falling edge interrupt for P0.1                                          | 0     |
+| ... | ...     | ...                                                                             | ...   |
+| 15  | P0.15EF | Enable falling edge interrupt for P0.15                                         | 0     |
+| 16  | P0.16EF | Enable falling edge interrupt for P0.16                                         | 0     |
 
 #### IO0IntStatR - IO2IntStatR (Estado por Flanco Ascendente)
 
@@ -93,13 +95,13 @@ Registro de **solo lectura** que indica si hay una interrupción por flanco asce
 
 **Tabla 119: GPIO Interrupt Status for Rising Edge (IO0IntStatR - 0x4002 8084)**
 
-| Bit | Símbolo | Descripción | Reset |
-|-----|---------|-------------|--------|
-| 0 | P0.0REI | Status of Rising Edge Interrupt for P0.0<br>• 0: No detectado<br>• 1: Interrupción generada por flanco ascendente | 0 |
-| 1 | P0.1REI | Status of Rising Edge Interrupt for P0.1 | 0 |
-| ... | ... | ... | ... |
-| 15 | P0.15REI | Status of Rising Edge Interrupt for P0.15 | 0 |
-| 16 | P0.16REI | Status of Rising Edge Interrupt for P0.16 | 0 |
+| Bit | Símbolo  | Descripción                                                                                                       | Reset |
+| --- | -------- | ----------------------------------------------------------------------------------------------------------------- | ----- |
+| 0   | P0.0REI  | Status of Rising Edge Interrupt for P0.0<br>• 0: No detectado<br>• 1: Interrupción generada por flanco ascendente | 0     |
+| 1   | P0.1REI  | Status of Rising Edge Interrupt for P0.1                                                                          | 0     |
+| ... | ...      | ...                                                                                                               | ...   |
+| 15  | P0.15REI | Status of Rising Edge Interrupt for P0.15                                                                         | 0     |
+| 16  | P0.16REI | Status of Rising Edge Interrupt for P0.16                                                                         | 0     |
 
 #### IO0IntStatF - IO2IntStatF (Estado por Flanco Descendente)
 
@@ -107,12 +109,12 @@ Registro de **solo lectura** que indica si hay una interrupción por flanco desc
 
 **Tabla 121: GPIO Interrupt Status for Falling Edge (IO0IntStatF - 0x4002 8088)**
 
-| Bit | Símbolo | Descripción | Reset |
-|-----|---------|-------------|--------|
-| 0 | P0.0FEI | Status of Falling Edge Interrupt for P0.0<br>• 0: No detectado<br>• 1: Interrupción generada por flanco descendente | 0 |
-| 1 | P0.1FEI | Status of Falling Edge Interrupt for P0.1 | 0 |
-| ... | ... | ... | ... |
-| 7 | P0.7FEI | Status of Falling Edge Interrupt for P0.7 | 0 |
+| Bit | Símbolo | Descripción                                                                                                         | Reset |
+| --- | ------- | ------------------------------------------------------------------------------------------------------------------- | ----- |
+| 0   | P0.0FEI | Status of Falling Edge Interrupt for P0.0<br>• 0: No detectado<br>• 1: Interrupción generada por flanco descendente | 0     |
+| 1   | P0.1FEI | Status of Falling Edge Interrupt for P0.1                                                                           | 0     |
+| ... | ...     | ...                                                                                                                 | ...   |
+| 7   | P0.7FEI | Status of Falling Edge Interrupt for P0.7                                                                           | 0     |
 
 #### IO0IntClr - IO2IntClr (Limpieza de Interrupciones)
 
@@ -120,14 +122,12 @@ Al escribir un 1 en cualquier bit de este registro, se limpia la interrupción p
 
 **Tabla 123: GPIO Interrupt Clear Register (IO0IntClr - 0x4002 808C)**
 
-| Bit | Símbolo | Descripción | Reset |
-|-----|---------|-------------|--------|
-| 0 | P0.0CI | Clear GPIO port Interrupts for P0.0<br>• 0: Los bits en IOxIntStatR e IOxStatF no cambian<br>• 1: Los bits correspondientes se limpian | 0 |
-| 1 | P0.1CI | Clear GPIO port Interrupts for P0.1 | 0 |
-| ... | ... | ... | ... |
-| 6 | P0.6CI | Clear GPIO port Interrupts for P0.6 | 0 |
-
-
+| Bit | Símbolo | Descripción                                                                                                                            | Reset |
+| --- | ------- | -------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| 0   | P0.0CI  | Clear GPIO port Interrupts for P0.0<br>• 0: Los bits en IOxIntStatR e IOxStatF no cambian<br>• 1: Los bits correspondientes se limpian | 0     |
+| 1   | P0.1CI  | Clear GPIO port Interrupts for P0.1                                                                                                    | 0     |
+| ... | ...     | ...                                                                                                                                    | ...   |
+| 6   | P0.6CI  | Clear GPIO port Interrupts for P0.6                                                                                                    | 0     |
 
 Para ver un ejemplo sobre esto, ver el archivo `src/gpioInt.c`.
 
@@ -144,19 +144,19 @@ Es importante destacar que **cada una de las interrupciones externas tiene un ve
 
 ### Registros asociados a la configuración de EINT
 
-* En **PINSEL4** se observa que los **bits 20:27** están asignados a la configuración de las **interrupciones externas**.
-* Los registros de control son:
+- En **PINSEL4** se observa que los **bits 20:27** están asignados a la configuración de las **interrupciones externas**.
+- Los registros de control son:
 
-  * **EXTINT** — *External Interrupt Flag register* (`0x400F C140`)
-  * **EXTMODE** — *External Interrupt Mode register* (`0x400F C148`)
-  * **EXTPOLAR** — *External Interrupt Polarity register* (`0x400F C14C`)
+  - **EXTINT** — _External Interrupt Flag register_ (`0x400F C140`)
+  - **EXTMODE** — _External Interrupt Mode register_ (`0x400F C148`)
+  - **EXTPOLAR** — _External Interrupt Polarity register_ (`0x400F C14C`)
 
 #### EXTINT
 
 Cuando un pin es configurado como interrupción externa, el **nivel o flanco** en ese pin (seleccionado por los registros **EXTMODE** y **EXTPOLAR**) activará una **bandera de interrupción** en este registro con una solicitud al NVIC. En caso que las interrupciones de dicho pin estén habilitadas, causará una interrupción al microprocesador.
 
-* **Escribir un `1` en los bits EINT0 a EINT3** **borra** el correspondiente bit.
-* En **modo por nivel**, la interrupción se borra **solo cuando el pin está en su estado inactivo**.
+- **Escribir un `1` en los bits EINT0 a EINT3** **borra** el correspondiente bit.
+- En **modo por nivel**, la interrupción se borra **solo cuando el pin está en su estado inactivo**.
 
 #### EXTMODE
 
@@ -164,42 +164,48 @@ Los bits en este registro seleccionan si cada pin es **level-sensitive** o **edg
 
 #### EXTPOLAR
 
-* En modo **level-sensitive**, este bit selecciona si el correspondiente pin es **high-active** o **low-active**.
-* En modo **edge-sensitive**, este bit selecciona si el pin es sensible a **falling-edge** o **rising-edge**.
-
+- En modo **level-sensitive**, este bit selecciona si el correspondiente pin es **high-active** o **low-active**.
+- En modo **edge-sensitive**, este bit selecciona si el pin es sensible a **falling-edge** o **rising-edge**.
 
 ---
 
-# Ejemplo paso a paso (GPIO  y NVIC)
+# Ejemplo paso a paso (GPIO y NVIC)
 
 1. **Seleccionar función GPIO del pin**
 
-   * Para P2.12: `PINSEL4` bits `[25:24] = 00` (GPIO).
+   - Para P2.12: `PINSEL4` bits `[25:24] = 00` (GPIO).
+
 2. **Configurar dirección**
 
-   * P2.12 como **entrada**: `FIO2DIR` bit 12 = 0.
-   * P0.22 como **salida**: `FIO0DIR` bit 22 = 1.
+   - P2.12 como **entrada**: `FIO2DIR` bit 12 = 0.
+   - P0.22 como **salida**: `FIO0DIR` bit 22 = 1.
+
 3. **Limpiar estados previos en GPIOINT**
 
-   * `IO2IntClr` = `1 << 12` (borra cualquier latcheo anterior).
+   - `IO2IntClr` = `1 << 12` (borra cualquier latcheo anterior).
+
 4. **Elegir flanco(s)**
 
-   * `IO2IntEnR |= (1 << 12)` para flanco **ascendente**
+   - `IO2IntEnR |= (1 << 12)` para flanco **ascendente**
      (opcional: `IO2IntEnF |= (1 << 12)` para descendente).
+
 5. **Configurar prioridad en NVIC**
 
-   * Escribir el **byte de prioridad** (5 bits efectivos en `[7:3]`) para **EINT3\_IRQn** (la IRQ que atiende GPIO 0/2).
+   - Escribir el **byte de prioridad** (5 bits efectivos en `[7:3]`) para **EINT3_IRQn** (la IRQ que atiende GPIO 0/2).
+
 6. **Limpiar pendiente (pending) en NVIC**
 
-   * `ICPR[0] |= (1 << EINT3_IRQn)`.
+   - `ICPR[0] |= (1 << EINT3_IRQn)`.
+
 7. **Habilitar NVIC**
 
-   * `ISER[0] |= (1 << EINT3_IRQn)`.
+   - `ISER[0] |= (1 << EINT3_IRQn)`.
+
 8. **En el handler (`EINT3_IRQHandler`)**
 
-   * Leer `IO2IntStatR/F` para saber qué pin/edge disparó.
-   * **Limpiar** el/los bits en `IO2IntClr` (si no, re-entra).
-   * Hacer la acción (ej.: *toggle* del LED).
+   - Leer `IO2IntStatR/F` para saber qué pin/edge disparó.
+   - **Limpiar** el/los bits en `IO2IntClr` (si no, re-entra).
+   - Hacer la acción (ej.: _toggle_ del LED).
 
 ---
 
