@@ -1,7 +1,7 @@
 # **GPIO**
 Los **GPIO** (*General Purpose Input/Output*) permiten usar los pines del microcontrolador como entradas o salidas digitales para interactuar con el mundo exterior: sensores, LEDs, botones, relés, etc.
 
-    
+
 
 ### La configuración de los GPIO requiere considerar:
 
@@ -41,7 +41,7 @@ Los **GPIO** (*General Purpose Input/Output*) permiten usar los pines del microc
 * Todos los pines **inician como entradas con pull-up activado** después del reset.
 
 ---
- 
+
 
 
 
@@ -183,13 +183,13 @@ LPC_GPIOINT->IO0IntEnR |= (1 << 10);  // Habilita interrupción por flanco ascen
 * Se requiere configurar tanto PINSEL (función), PINMODE (resistencia), como FIODIR (dirección) antes de usar.
 
 
---- 
-## Ejemplo de código 
+---
+## Ejemplo de código
 
 Encender los 3 leds RGB de la placa LPC1769.
 
 <img src="./img/rgb.png" width="50%">
- 
+
 ### Pines utilizados:
 
 | Color del LED | Pin MCU | Puerto | Número de bit |
@@ -274,4 +274,3 @@ int main(void) {
 
 
 Hacer un desarrollo que simule el funcionamiento de un semáforo.
-

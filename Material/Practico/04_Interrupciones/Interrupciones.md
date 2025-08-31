@@ -1,4 +1,4 @@
- 
+
 
 # Interrupciones en el LPC1769
 
@@ -8,11 +8,11 @@
 
 * Controla excepciones del sistema (software) e interrupciones de periféricos (hardware).
 * En el LPC176x/5x, el NVIC soporta **35 interrupciones vectorizadas** .
-* **32 niveles de prioridad programables**, con enmascaramiento de prioridad por hardware. 
+* **32 niveles de prioridad programables**, con enmascaramiento de prioridad por hardware.
 * **Tabla de vectores reubicable**.
 * Soporta una interrupción no enmascarable (**NMI**), que no se puede desactivar por software.
 * Permite **generación de interrupciones por software**.
-  
+
 ## Fuentes de interrupción
 
 
@@ -23,8 +23,8 @@ Cada periférico puede tener uno o varios flags que disparan la misma línea de 
 * UART0 (IRQ ID 5, excepción 21): interrupción por datos recibidos (RDA), transmisión vacía (THRE), timeout, etc.
 
 > Es importante aclarar que un mismo ID de interrupción puede tener varias causas, y dentro de la ISR hay que leer los flags del periférico para saber qué pasó.
- 
- 
+
+
 ## Interrupción no enmascarable (NMI)
 
 * El NVIC además maneja la **interrupción no enmascarable (NMI)**.
@@ -108,7 +108,7 @@ El NVIC en el LPC176x/5x dispone de varios registros que permiten **habilitar, d
 * **STIR (Software Trigger Interrupt Register)** - `0xE000 EF00`
 
   Permite **disparar una interrupción por software**, escribiendo el número de interrupción en este registro.
-  
+
 
 * Solo se aplica a interrupciones de periféricos (no a excepciones del sistema).
 * Campo principal:
@@ -117,8 +117,8 @@ El NVIC en el LPC176x/5x dispone de varios registros que permiten **habilitar, d
 * Bits 31:9 → reservados.
 
 > Por defecto, solo el software privilegiado puede escribir en STIR.
-> Se puede habilitar acceso desde software no privilegiado si se configura el bit correspondiente en el registro CCR (Control Configuration Register).  
- 
+> Se puede habilitar acceso desde software no privilegiado si se configura el bit correspondiente en el registro CCR (Control Configuration Register).
+
 
 
 #  NVIC y CMSIS
@@ -174,7 +174,7 @@ En el CMSIS tenemos arrays de 8 elementos de 32 bits, pero solo usamos 2 para el
   * 5 bits por interrupción.
   * 0 = mayor prioridad, 31 = menor prioridad.
 
- 
+
 
 ## Para presta atención
 
@@ -204,11 +204,11 @@ void __enable_irq(void);    // Habilita todas las IRQ
 * `NVIC_GetActive(IRQn_Type IRQn)` → Devuelve si está activa.
 * `NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)` → Asigna prioridad.
 * `NVIC_GetPriority(IRQn_Type IRQn)` → Consulta prioridad.
-* `NVIC_SystemReset(void)` → Fuerza un reset del sistema. 
+* `NVIC_SystemReset(void)` → Fuerza un reset del sistema.
 
 ### Handlers
 
-Luego el archivo `startup_LPC17xx.c` del proyecto, tiene handlers definidos debidamente para cada interrupción (apuntando a un loop infinito por defecto). 
+Luego el archivo `startup_LPC17xx.c` del proyecto, tiene handlers definidos debidamente para cada interrupción (apuntando a un loop infinito por defecto).
 
 Para controlar como se comporta cada interrupción, se debe definir el handler fuentemente en nuestro programa.
 
@@ -221,7 +221,7 @@ Ejemplos de handlers:
 
 
 ##  Comportamiento de interrupciones
- 
+
  Una interrupción puede quedar pendiente por:
 
   * Señal alta detectada.
@@ -233,7 +233,7 @@ Ejemplos de handlers:
   * El procesador entra al ISR.
   * Se escribe en ICPR.
 
- 
+
 ## Estados de una interrupción
 
 Cuando decimos que una interrupción está **pendiente**, significa que el microcontrolador ya detectó que **alguien pidió atención** (por hardware o software) y la tiene en cola para ejecutarla.
@@ -265,11 +265,11 @@ En este caso el periférico no mantiene el nivel, sino que genera un pulso corto
 * El procesador atiende el *handler*.
 * Como el pulso ya pasó, al salir del ISR la señal ya no está activa → la interrupción no vuelve a dispararse.
 
---- 
+---
 
 * **Pendiente** = “el micro se enteró que tiene que atender algo, lo tiene en lista de espera”.
 * **Activo** = “está dentro del handler de esa interrupción”.
-* **Inactivo** = “no hay nada que atender”. 
+* **Inactivo** = “no hay nada que atender”.
 ---
 
 
@@ -282,7 +282,7 @@ Cada vez que se interrumpa el WDT, se incrementa el contador_irq.
 
 ```c
 
-#include "LPC17xx.h"    
+#include "LPC17xx.h"
 volatile uint32_t contador_irq = 0;
 
 /* ISR con el nombre estándar */
@@ -297,12 +297,12 @@ int main(void) {
        Con CMSIS de registros: NVIC->IP[...]     */
 
     /* Prioridad = 10 (0 = más alta, 31 = más baja) */
-    /* Para WDT (IRQ 0), el byte de prioridad es IP[0]. 
+    /* Para WDT (IRQ 0), el byte de prioridad es IP[0].
        Según tu tabla, el HW usa los bits [7:3]; los [2:0] se leen en 0. */
     NVIC->IP[0] = (10 & 0x1F) << 3;
 
     /* === 2) LIMPIAR PENDING PREVIO ============================== */
-    /* WDT está en el grupo 0 (bits 0..31) => ICPR[0] 
+    /* WDT está en el grupo 0 (bits 0..31) => ICPR[0]
     con EL "u" lo decimos al compilador que es un unsigned int */
     NVIC->ICPR[0] = (1u << 0);
 

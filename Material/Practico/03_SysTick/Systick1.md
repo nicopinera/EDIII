@@ -149,7 +149,7 @@ void SysTick_Handler(void) {
 int main(void) {
     // Configurar SysTick para 1 ms
     SysTick->LOAD = (SysTick->CALIB & 0xFFFFFF)/10 // 1ms con 100 MHz
-    
+
     SysTick->VAL  = 0;                     // Resetear contador
     SysTick->CTRL = (1 << 2) |  // Reloj = CPU
                     (1 << 1) |  // Interrupción habilitada

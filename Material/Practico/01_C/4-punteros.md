@@ -6,7 +6,7 @@ Primero veremos qué son los punteros y cómo usarlos. Luego profundizaremos en 
 
 ## ¿Qué es un puntero?
 
-Un puntero en C es, fundamentalmente, una variable que almacena la dirección de otra variable.  
+Un puntero en C es, fundamentalmente, una variable que almacena la dirección de otra variable.
 Cada variable en un programa en ejecución se guarda en una ubicación específica de memoria. Esta ubicación tiene una dirección (en general expresada como un número hexadecimal). Un puntero guarda esa dirección.  Esto permite la manipulación de memoria a bajo nivel y más adelante veremos como nos permite un manejo eficiente de arreglos y cadenas de caracteres en C.
 
 > **IMPORTANTE**
@@ -31,7 +31,7 @@ Un `int*` solo puede apuntar a un entero (o al primer elemento de un arreglo de 
 
 ### Ejemplo:
 
-Por ejemplo, si tenemos una variable entera `num` almacenada en la dirección de memoria `0x80000004`, un puntero podría contener el valor `0x80000004` para “apuntar” a `num`.  
+Por ejemplo, si tenemos una variable entera `num` almacenada en la dirección de memoria `0x80000004`, un puntero podría contener el valor `0x80000004` para “apuntar” a `num`.
 ```c
 int num = 42;
 int *ptr;
@@ -51,14 +51,14 @@ El valor de ptr es: 0x80000004
 El valor al que apunta ptr es: 42
 ```
 
-En este fragmento, `int *ptr;` declara `ptr` como un puntero a entero. 
+En este fragmento, `int *ptr;` declara `ptr` como un puntero a entero.
 
 La instrucción `ptr = &num;` asigna a `ptr` la dirección de `num` (usando el operador de dirección `&`). Ahora decimos que “`ptr` apunta a `num`”.
 
 
 Luego imprimimos `ptr` (con el especificador de formato `%p` para direcciones).
 
- 
+
 ### Punteros sin inicializar:
 
 Cuando un puntero se declara, no apunta automáticamente a algo significativo. Si simplemente escribimos `int *ptr;` dentro de una función, `ptr` contendrá una dirección basura indefinida hasta que lo inicialicemos.
@@ -72,7 +72,7 @@ Cuando un puntero se declara, no apunta automáticamente a algo significativo. S
 >
 > **Por eso, siempre se debe inicializar un puntero antes de usarlo.**
 
---- 
+---
 ### Operadores de puntero
 
 
@@ -88,7 +88,7 @@ En este momento, es importante entender dos operadores clave:
 >
 > El `*` debe estar entre el tipo de dato y el nombre del puntero. Puede estar pegado al tipo de dato o al nombre del puntero y tambien puede haber un espacio entre ambos.
 
-Por ejemplo: 
+Por ejemplo:
 ```c
 int* ptr;
 int * ptr;
@@ -120,54 +120,54 @@ En este caso, tanto `num` como `*ptr` se refieren a la misma variable.
 
 
 > **RESUMEN**
-> 
-> Los operadores `&` y `*` son inversos entre sí:  
-> Si `ptr = &var;` ---> entonces `*ptr` es `var`.   
+>
+> Los operadores `&` y `*` son inversos entre sí:
+> Si `ptr = &var;` ---> entonces `*ptr` es `var`.
 
- 
+
 ## Aritmética de punteros
 
-Los punteros no se usan solo para variables individuales; también puedes hacer operaciones aritméticas con ellos para moverte por la memoria. Esto es especialmente útil con arreglos (tema que veremos después).  
+Los punteros no se usan solo para variables individuales; también puedes hacer operaciones aritméticas con ellos para moverte por la memoria. Esto es especialmente útil con arreglos (tema que veremos después).
 
-En C, la **aritmética de punteros** está definida como operaciones que mueven el puntero para apuntar a otras ubicaciones de memoria relativas a la actual.  
+En C, la **aritmética de punteros** está definida como operaciones que mueven el puntero para apuntar a otras ubicaciones de memoria relativas a la actual.
 Sin embargo, no se comporta como la aritmética de enteros normal: **está escalada por el tamaño del tipo de dato al que apunta el puntero**.
 
-Por ejemplo, supongamos que `ptr` es un `int*` que guarda la dirección `0x1000`.  
+Por ejemplo, supongamos que `ptr` es un `int*` que guarda la dirección `0x1000`.
 En un sistema de 32 bits, un `int` ocupa 4 bytes, así que:
 
-- `ptr + 1` → dirección `0x1004` (siguiente entero en memoria)  
-- `ptr + 2` → dirección `0x1008` (dos enteros adelante)  
+- `ptr + 1` → dirección `0x1004` (siguiente entero en memoria)
+- `ptr + 2` → dirección `0x1008` (dos enteros adelante)
 
 
 <img src="./img/arithmetic_pointers.png" width="70%"/>
 
-- En general, `ptr + n` mueve el puntero hacia adelante **n elementos** (no bytes) de su tipo.  
-- Del mismo modo, `ptr - n` lo mueve hacia atrás **n elementos**.  
+- En general, `ptr + n` mueve el puntero hacia adelante **n elementos** (no bytes) de su tipo.
+- Del mismo modo, `ptr - n` lo mueve hacia atrás **n elementos**.
 - El compilador hace este escalado automáticamente en función del tipo de puntero.
 
 Ejemplos por tipo de dato:
 
-- Si `ptr` es un `char*` (1 byte por elemento), `ptr + 1` avanza 1 byte.  
+- Si `ptr` es un `char*` (1 byte por elemento), `ptr + 1` avanza 1 byte.
 - Si `ptr` es un `double*` (8 bytes por elemento en la mayoría de sistemas), `ptr + 1` salta 8 bytes.
 
 ---
 
 ### Operaciones válidas con punteros
 
-- **Incremento y decremento:**  
-  `p++` o `++p` avanza al siguiente elemento,  
+- **Incremento y decremento:**
+  `p++` o `++p` avanza al siguiente elemento,
   `p--` retrocede al elemento anterior.
 
-- **Suma y resta de un entero:**  
+- **Suma y resta de un entero:**
   `p + n` o `p - n` mueve el puntero **n elementos** hacia adelante o atrás (el desplazamiento se escala por el tamaño del tipo apuntado).
 
-- **Resta entre punteros:**  
-  La resta entre punteros es válida si ambos son del mismo tipo. 
+- **Resta entre punteros:**
+  La resta entre punteros es válida si ambos son del mismo tipo.
   El resultado es el número de elementos entre los punteros (no es el número de bytes).
 
 Por ejemplo: si tenemos dos punteros tipo `int*` ptr1 (dirección: 1000) y ptr2 (dirección: 1004) y los restamos, la diferencia entre direcciones es de 4 bytes. Como el tamaño de un int es de 4 bytes, la diferencia entre ptr1 y ptr2 viene dado es = 1.
 
- 
+
 ---
 
 ### Operaciones no permitidas
@@ -188,8 +188,8 @@ printf("%d\n", *p);        // imprime 20 (arr[1])
 printf("%ld\n", q - p);    // imprime 2 (cant. de elementos entre arr[1] y arr[3])
 ```
 
- 
-La aritmética de punteros es muy usada en bucles para recorrer arreglos o buffers, a menudo combinada con desreferencia (`*(p + i)` es equivalente a `p[i]`).  
+
+La aritmética de punteros es muy usada en bucles para recorrer arreglos o buffers, a menudo combinada con desreferencia (`*(p + i)` es equivalente a `p[i]`).
 
 > **PRECAUCIÓN**
 >

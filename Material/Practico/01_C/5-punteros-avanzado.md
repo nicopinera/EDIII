@@ -1,14 +1,14 @@
 # Punteros y arreglos
 
-En C, los arreglos y los punteros están estrechamente relacionados.  
-En muchas expresiones, **el nombre de un arreglo se convierte automáticamente** (o *"decay"*) **en un puntero a su primer elemento**.  
+En C, los arreglos y los punteros están estrechamente relacionados.
+En muchas expresiones, **el nombre de un arreglo se convierte automáticamente** (o *"decay"*) **en un puntero a su primer elemento**.
 
 Por ejemplo, si tienes:
 ```c
 int arr[10];
 ```
-entonces, en la mayoría de los contextos, `arr` puede usarse como si fuera de tipo `int*` apuntando a `arr[0]`.  
-De hecho, `arr` y `&arr[0]` devuelven la **misma dirección**.  
+entonces, en la mayoría de los contextos, `arr` puede usarse como si fuera de tipo `int*` apuntando a `arr[0]`.
+De hecho, `arr` y `&arr[0]` devuelven la **misma dirección**.
 Podrías hacer:
 ```c
 int *p = arr;
@@ -25,11 +25,11 @@ Esto es muy útil para **iterar sobre arreglos** con aritmética de punteros o *
 >
 > Aunque `arr` (en una expresión) actúa como un puntero al primer elemento, hay una distinción clave:
 
-- `arr` **no** es un *lvalue* modificable → no puedes hacer `arr = otroArray;`  
+- `arr` **no** es un *lvalue* modificable → no puedes hacer `arr = otroArray;`
   (en su declaración, `arr` es una referencia constante a un bloque fijo de memoria).
 - En cambio, un puntero como `p` **sí** puede reasignarse para apuntar a otro lado.
 
-En resumen: los arreglos “se comportan como” punteros en expresiones, pero **no son completamente intercambiables**.  
+En resumen: los arreglos “se comportan como” punteros en expresiones, pero **no son completamente intercambiables**.
 Aun así, entender que `arr` puede tratarse como un puntero a su primer elemento es fundamental.
 
 ---
@@ -46,11 +46,11 @@ printf("%d\n", *arr);        // imprime 5 (arr[0]) , desreferencia de arr
 
 ```
 
-Aquí, `ptr[2]` y `numbers[2]` se refieren al **mismo elemento**.  
+Aquí, `ptr[2]` y `numbers[2]` se refieren al **mismo elemento**.
 El estándar de C define que `ptr[i]` es equivalente a `*(ptr + i)`.
 
 ---
-Incluso se puede hacer algo como `2[numbers]` porque es igual a `*(2 + numbers)` → mismo que `numbers[2]`.  
+Incluso se puede hacer algo como `2[numbers]` porque es igual a `*(2 + numbers)` → mismo que `numbers[2]`.
 Pero **no lo hagas nunca en código real**; solo sirve para ilustrar que el índice `x[y]` se interpreta como `*(x + y)`.
 
 ---
@@ -64,14 +64,14 @@ for (int *p = arr; p < end; ++p) {
     printf("%d\n", *p);
 }
 ```
-Este bucle recorre el arreglo desde el inicio (`arr`) hasta `end` (sin incluirlo), desreferenciando en cada paso para imprimir el valor.  
+Este bucle recorre el arreglo desde el inicio (`arr`) hasta `end` (sin incluirlo), desreferenciando en cada paso para imprimir el valor.
 Evita usar una variable de índice y puede ser muy eficiente.
 
 ---
 
 # Punteros y cadenas
 
-En C, las **cadenas** se representan típicamente como **arreglos de `char` terminados en el carácter nulo** (`'\0'`).  
+En C, las **cadenas** se representan típicamente como **arreglos de `char` terminados en el carácter nulo** (`'\0'`).
 Dado que los arreglos y punteros están relacionados, una cadena puede manipularse fácilmente con un `char*`.
 
 Ejemplo:
@@ -85,7 +85,7 @@ while (*p) {           // recorre hasta encontrar '\0'
 }
 ```
 
-Muchas funciones estándar (como `strlen`, `strcpy`, etc.) usan `char*` para procesar cadenas.  
+Muchas funciones estándar (como `strlen`, `strcpy`, etc.) usan `char*` para procesar cadenas.
 Por ejemplo:
 ```c
 int strlen(const char *s);
@@ -94,7 +94,7 @@ recibe un `const char*` apuntando a la cadena y recorre la memoria hasta encontr
 
 ---
 
-### Cuidado con los literales de cadena:  
+### Cuidado con los literales de cadena:
 Si haces:
 ```c
 char *msg = "Hello";
@@ -111,15 +111,15 @@ Si necesitas modificar la cadena, se copia primero a un arreglo (esto sí genera
 char msg[] = "Hello";  // ahora se puede modificar
 msg[0] = 'J';          // válido
 ```
- 
 
-**Ventaja de usar punteros con cadenas:**  
-Permite manejo dinámico, paso eficiente de parámetros a funciones y manipulación directa de la memoria subyacente.  
+
+**Ventaja de usar punteros con cadenas:**
+Permite manejo dinámico, paso eficiente de parámetros a funciones y manipulación directa de la memoria subyacente.
 La iteración puede hacerse con índices (`str[i]`) o aritmética de punteros (`*(str + i)`), según la preferencia y el caso de uso.
- 
+
 ## Punteros y estructuras
 
-Los punteros también pueden apuntar a tipos estructurados (`struct` o `union`).  
+Los punteros también pueden apuntar a tipos estructurados (`struct` o `union`).
 Un puntero a una estructura permite:
 
 - **Pasar estructuras grandes de forma eficiente** (se pasa solo la dirección en lugar de copiar toda la estructura).
@@ -131,11 +131,11 @@ struct Point {
     int x;
     int y;
 };
- 
-struct Point p1;            // declaración de una estructura tipo Point 
+
+struct Point p1;            // declaración de una estructura tipo Point
 
 
-struct Point *pPtr = &p1;   // declaración de un puntero a la estructura p1 
+struct Point *pPtr = &p1;   // declaración de un puntero a la estructura p1
 ````
 
 Aquí, `pPtr` es un puntero a `struct Point`.
@@ -265,4 +265,3 @@ Esto demuestra que un puntero a puntero permite **manipular el puntero original*
 
 📌 Podes tener más niveles (`***` para triple puntero, etc.), pero rara vez se necesitan a menos que trabajes con datos muy complejos o arreglos multidimensionales.
 El caso más común en C es el **doble puntero**.
-

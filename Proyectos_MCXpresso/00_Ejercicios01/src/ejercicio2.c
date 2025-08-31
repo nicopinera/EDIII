@@ -42,5 +42,3 @@ void configuracionGPIO2(){
 
 	LPC_GPIO2->FIODIR |= (0XFF); // PONGO LOS 10 PRIMEROS EN '1' PARA PONER SALIDA
 }
-
-

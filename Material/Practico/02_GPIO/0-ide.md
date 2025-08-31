@@ -27,7 +27,7 @@ Esto requiere más pasos y conocimientos técnicos:
 2. **Toolchain ARM GCC**: `arm-none-eabi-gcc`, `arm-none-eabi-gdb`, `binutils-arm-none-eabi`.
 3. **CMSIS**: descargar las librerías manualmente desde ARM o NXP.
 4. **Makefile**: escribir reglas para compilar, enlazar y generar el binario (`.bin` o `.elf`).
-5. **Herramienta de carga**: como `CMSIS-DAP`,`openocd` o algún otro probe que use un protocolo compatible para programar la placa.  
+5. **Herramienta de carga**: como `CMSIS-DAP`,`openocd` o algún otro probe que use un protocolo compatible para programar la placa.
 
 Si bien tienen un control total sobre la configuración, es más propenso a errores de integración.
 Para iniciar, no se recomienda.
@@ -35,7 +35,7 @@ Para iniciar, no se recomienda.
 ---
 
 ## 3. Instalación de MCUXpresso IDE
- 
+
 ### Descarga e instalación
 
 1. Ir a la [página oficial de MCUXpresso IDE](https://www.nxp.com/design/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-integrated-development-environment-ide:MCUXpresso-IDE).
@@ -64,7 +64,7 @@ sudo ./mcuxpressoide-11.8.0_1165.x86_64.deb.bin
 1. Abrir MCUXpresso IDE.
 2. Seleccionar un **workspace** (ruta sin espacios recomendada).
 
-Este espacio de trabajo es el directorio principal en el que se almacenarán y organizarán los proyectos y archivos relacionados con el desarrollo.   
+Este espacio de trabajo es el directorio principal en el que se almacenarán y organizarán los proyectos y archivos relacionados con el desarrollo.
     Esta ruta puede dejarse por defecto o se puede colocar otra.
 
 Al dar click en lanzar, se nos abrirá la ventana principal de la IDE.
@@ -105,7 +105,5 @@ Build Finished. 0 errors, 0 warnings.
 
 ## 6. Buenas prácticas
 
-* Usar nombres cortos y sin espacios en proyectos. 
+* Usar nombres cortos y sin espacios en proyectos.
 * Usar control de versiones (Git).
- 
-

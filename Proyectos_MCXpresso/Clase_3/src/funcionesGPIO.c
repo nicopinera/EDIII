@@ -96,4 +96,3 @@ uint8_t statusGPIO(uint8_t puerto, uint8_t pin){
 	}
 	return estadoPin;
 }
-

@@ -76,4 +76,3 @@ Secuencia: ON-OFF-ON-OFF-ON-OFF-ON-OFF (se repite)
 - Manejador del timer SysTick
 - Implementa divisor de frecuencia (10:1)
 - Genera el patrón de onda en el LED
-

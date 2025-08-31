@@ -2,7 +2,7 @@
 
 ## Documentación de Referencia
 Para información detallada, consultar:
-- Capítulo 9 y 3 del User Manual 
+- Capítulo 9 y 3 del User Manual
 
 ## Conceptos Fundamentales
 
@@ -12,7 +12,7 @@ Las interrupciones de GPIO se clasifican en dos categorías principales:
 
 1. **Interrupciones usando puertos estándar**: Cualquier pin de los puertos 0 y 2
 2. **Interrupciones usando pines externos dedicados**: Pines específicos de interrupciones externas
- 
+
 
 ## Interrupciones de GPIO0 y GPIO2
 
@@ -21,7 +21,7 @@ Las interrupciones de GPIO se clasifican en dos categorías principales:
 - **Generación al microprocesador**: Los puertos 0 y 2 pueden generar interrupciones directamente
 - **Configuración de flancos**: Cada pin puede programarse para interrumpir por:
   - Flanco ascendente
-  - Flanco descendente  
+  - Flanco descendente
   - Ambos flancos
 - **Sincronización**: La detección de flanco es asíncrona, pero puede operar aunque el clock no esté presente (modo Power down)
 - **Posición compartida en NVIC**: GPIO0 y GPIO2 comparten "External Interrupt 3", requiriendo verificación del pin causante en la ISR
@@ -125,9 +125,9 @@ Al escribir un 1 en cualquier bit de este registro, se limpia la interrupción p
 | 0 | P0.0CI | Clear GPIO port Interrupts for P0.0<br>• 0: Los bits en IOxIntStatR e IOxStatF no cambian<br>• 1: Los bits correspondientes se limpian | 0 |
 | 1 | P0.1CI | Clear GPIO port Interrupts for P0.1 | 0 |
 | ... | ... | ... | ... |
-| 6 | P0.6CI | Clear GPIO port Interrupts for P0.6 | 0 | 
+| 6 | P0.6CI | Clear GPIO port Interrupts for P0.6 | 0 |
 
- 
+
 
 Para ver un ejemplo sobre esto, ver el archivo `src/gpioInt.c`.
 
@@ -269,7 +269,7 @@ void EINT3_IRQHandler(void) {
         LPC_GPIOINT->IO2IntClr = (1u << GPIO_IN_BIT);
 
         /* Acción: toggle LED P0.22   */
-        LED_PORT->FIOPIN ^= (1u << LED_BIT); 
+        LED_PORT->FIOPIN ^= (1u << LED_BIT);
     }
 
     /* (Opcional) Manejar también GPIO0 leyendo IO0IntStatR/F y limpiando IO0IntClr */
@@ -308,4 +308,3 @@ void EINT3_IRQHandler(void) {
     }
 }
 ```
- 

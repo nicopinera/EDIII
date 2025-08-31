@@ -5,7 +5,7 @@
 Indican qué variables vamos a usar, qué tipo tienen y (opcionalmente) su valor inicial.
 
 Tienen el siguiente formato:
- 
+
 ```c
 [especificador] [calificador] [modificador]  [tipo] [nombre] = [valor inicial];
 ```
@@ -42,13 +42,13 @@ void copiar(int from, int to) {
 ```
 ---
 
-### 2. **Especificador de almacenamiento** 
-  
+### 2. **Especificador de almacenamiento**
+
 
 La **clase de almacenamiento** de una variable define:
 
 * Su **alcance (scope)**, su **tiempo de vida (lifetime)** y **ubicación de almacenamiento**
- 
+
 Pueden ser:
 
 * `auto`: se destruye cuando la función termina.
@@ -56,14 +56,14 @@ Pueden ser:
 * `extern`: se define en otro archivo y se puede usar en el archivo actual.
 * `register`: se intenta usar un registro de la CPU, pero no es garantizado.
 
---- 
+---
 Si no se declara ningún especificador:
 * Las variables dentro de funciones son `auto` por defecto.
-* Las variables fuera de funciones son `static` por defecto. 
+* Las variables fuera de funciones son `static` por defecto.
 
 ---
- 
- 
+
+
 
 | Especificador | Ubicación de almacenamiento             | Tiempo de vida                  | Alcance (scope)                                                         | Valor inicial              | Comentarios clave                               |
 | ------------- | --------------------------------------- | ------------------------------- | ---------------------------------------------------------------------- | -------------------------- | ----------------------------------------------- |
@@ -74,7 +74,7 @@ Si no se declara ningún especificador:
 
 ---
 
- 
+
 
 > [!NOTE]
 > [What are storage class specifiers in C?](https://how.dev/answers/what-are-storage-class-specifiers-in-c)
@@ -155,7 +155,7 @@ long double resultado; // double extendido
   - minúsculas para variables
   - MAYÚSCULAS para constantes simbólicas
 - Evitar nombres confusos o con `_` inicial (estos están reservados a librerías).
-- Mínimo: los primeros 31 caracteres deben ser significativos (al menos), es decir, tener alguna diferencia con otros nombres.   
+- Mínimo: los primeros 31 caracteres deben ser significativos (al menos), es decir, tener alguna diferencia con otros nombres.
 - Las **palabras clave** (`if`, `int`, `float`, etc.) están reservadas y **no se pueden usar como nombres**.
 
 > Buenas prácticas: usa nombres claros, cortos pero significativos.
@@ -194,7 +194,7 @@ uint32_t estado = *GPIO_PORT;  // Leer el valor del registro GPIO_PORT
 | `* const`      | Puntero constante (no puede cambiar de dirección)                  |
 | `GPIO_PORT`    | Nombre de la variable                                              |
 | `= ...`        | Se inicializa apuntando a una dirección fija de memoria |
- 
+
 
 ## Tamaños de los tipos
 
@@ -205,7 +205,7 @@ uint32_t estado = *GPIO_PORT;  // Leer el valor del registro GPIO_PORT
   - `short <= int <= long`
 
 Relaciones entre los tipos:
-```c 
+```c
 sizeof(char)    = 1              // siempre 1 byte
 sizeof(short)  <= sizeof(int)
 sizeof(int)    <= sizeof(long)
@@ -378,7 +378,7 @@ enum escapes { BELL = '\a', BACKSPACE = '\b', TAB = '\t' , NEWLINE = '\n', RETUR
 | `\'`   | apóstrofe              |
 | `\"`   | comillas               |
 | `\ooo` | valor octal            |
-| `\xhh` | valor hexadecimal      | 
+| `\xhh` | valor hexadecimal      |
 
 
 
@@ -387,16 +387,16 @@ enum escapes { BELL = '\a', BACKSPACE = '\b', TAB = '\t' , NEWLINE = '\n', RETUR
 - Se puede convertir un tipo a otro usando **operadores de conversión** o **funciones de conversión**. Se puede hacer de forma implícita (automática) o explícita(manual).
 - Ejemplo:
   ```c
-  int x = 10; 
+  int x = 10;
   float y = 3.14;
   int z = x + y;  // conversión implícita a float
   int w = (int) y;  // conversión explícita a int
   ```
 
-Reglas generales: 
+Reglas generales:
 - C promociona tipos más pequeños a más grandes. Ej: Los int se convierten a float si hay un float en la operación.
 - Los char y short se convierten a int antes de operar.
-- Se puede convertir un tipo a uno más pequeño manualmente, pero se puede perder información (truncamiento).  
+- Se puede convertir un tipo a uno más pequeño manualmente, pero se puede perder información (truncamiento).
 
 
 Ejemplo en un sistema embebido:
@@ -413,8 +413,3 @@ uint8_t dato = (uint8_t)(ADC_Read() >> 2);
 | **Truncamiento**                      | `(int)3.9 → 3`                                               |
 | **Conversión entre signo/sin signo**  | `int a = -1; uint32_t b = a;` → `b` es enorme                |
 | **Alineación incorrecta en punteros** | `(uint32_t *)ptr_byte` sin verificar alineación puede fallar |
-
- 
-
-
-

@@ -96,11 +96,11 @@ Si no definiste el handler, ese nombre (p. ej. `TIMER0_IRQHandler`) es **un alia
   ```
 
 Con eso, la entrada `TIMER0_IRQHandler` en la tabla **ya apuntaba a un símbolo**; solo que ahora ese símbolo **lo aportas tú** (fuerte), sustituyendo al alias débil.
- 
-## Buenas prácticas 
+
+## Buenas prácticas
 
 * **Nombre exacto** del handler = el que está en el vector (respetar mayúsculas/minúsculas).
- 
+
 * **No olvides limpiar el flag** del periférico dentro del ISR; si no, la IRQ se re-dispara.
 * **No uses bloqueos largos** en el ISR (ni `printf` pesado). Mantén el handler **corto** y pasa trabajo al *thread* principal (p. ej., con flags/colas).
 * **Weak vs fuerte**: solo puede haber **una** definición fuerte del mismo símbolo en todo el proyecto (o el *linker* dará error).

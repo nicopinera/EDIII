@@ -155,7 +155,7 @@ Su nombre viene de "pragmatic information". Cada compilador tiene sus propios #p
 
 ---
 
-### Ejemplo 1: `#pragma pack` 
+### Ejemplo 1: `#pragma pack`
 Con el objetivo de evitar relleno ("padding") automático que el compilador pone en estructuras para alinearlas.
 
 #### Sin `#pragma`:
@@ -181,11 +181,11 @@ struct SensorData {
 ```
 
 Esto **desactiva el relleno automático**, y ahora la estructura ocupa **solo 5 bytes**.
- 
+
 ---
 
 ### Ejemplo 2: Desactivar advertencias
- 
+
 En GCC:
 
 ```c
@@ -194,7 +194,7 @@ En GCC:
 
 ---
 
-### Ejemplo 3: Controlar sección de memoria  
+### Ejemplo 3: Controlar sección de memoria
 
 En el caso de que una función se ubique en una región de memoria específica (útil en **bootloaders**, por ejemplo):
 
@@ -206,12 +206,10 @@ const uint8_t firmware_version[] = { 1, 0, 3 };
 Este `#pragma` (dependiendo del compilador, por ejemplo IAR) indica que `firmware_version` debe ir **exactamente** en esa dirección de memoria.
 
 ---
- 
+
 ## Utilidad del preprocesador en embebidos
 
 * **Configuración por hardware:** se define qué pines, módulos, o versiones se usan.
 * **Compilar para distintos dispositivos sin cambiar el código base.**
 * **Control preciso del código incluido**, esencial para ahorrar memoria y ciclos.
 * **Facilita reutilizar drivers entre proyectos**.
-
- 

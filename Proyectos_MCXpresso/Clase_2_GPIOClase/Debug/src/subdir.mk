@@ -2,21 +2,21 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-# Add inputs and outputs from these tool invocations to the build variables 
+# Add inputs and outputs from these tool invocations to the build variables
 C_SRCS += \
 ../src/GPIOClase.c \
 ../src/cr_startup_lpc175x_6x.c \
-../src/crp.c 
+../src/crp.c
 
 C_DEPS += \
 ./src/GPIOClase.d \
 ./src/cr_startup_lpc175x_6x.d \
-./src/crp.d 
+./src/crp.d
 
 OBJS += \
 ./src/GPIOClase.o \
 ./src/cr_startup_lpc175x_6x.o \
-./src/crp.o 
+./src/crp.o
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -34,4 +34,3 @@ clean-src:
 	-$(RM) ./src/GPIOClase.d ./src/GPIOClase.o ./src/cr_startup_lpc175x_6x.d ./src/cr_startup_lpc175x_6x.o ./src/crp.d ./src/crp.o
 
 .PHONY: clean-src
-

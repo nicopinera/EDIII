@@ -2,24 +2,24 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-# Add inputs and outputs from these tool invocations to the build variables 
+# Add inputs and outputs from these tool invocations to the build variables
 C_SRCS += \
 ../src/cr_startup_lpc175x_6x.c \
 ../src/crp.c \
 ../src/ejercicio1.c \
-../src/ejercicio2.c 
+../src/ejercicio2.c
 
 C_DEPS += \
 ./src/cr_startup_lpc175x_6x.d \
 ./src/crp.d \
 ./src/ejercicio1.d \
-./src/ejercicio2.d 
+./src/ejercicio2.d
 
 OBJS += \
 ./src/cr_startup_lpc175x_6x.o \
 ./src/crp.o \
 ./src/ejercicio1.o \
-./src/ejercicio2.o 
+./src/ejercicio2.o
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -37,4 +37,3 @@ clean-src:
 	-$(RM) ./src/cr_startup_lpc175x_6x.d ./src/cr_startup_lpc175x_6x.o ./src/crp.d ./src/crp.o ./src/ejercicio1.d ./src/ejercicio1.o ./src/ejercicio2.d ./src/ejercicio2.o
 
 .PHONY: clean-src
-

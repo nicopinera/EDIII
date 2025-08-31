@@ -48,11 +48,11 @@ Por ejemplo:
 int x = 10;
 int y = x++; // y = 10, x = 11
 int z = ++x; // z = 12, x = 12
-``` 
+```
 
 
 ## Operadores de bit
- 
+
  | Operador | Descripción | Ejemplo |
  |----------|-------------|---------|
  | &        | AND | `x & y` |
@@ -61,11 +61,11 @@ int z = ++x; // z = 12, x = 12
  | ~        | NOT | `~x` |
  | <<       | Desplazamiento a izquierda | `x << y` |
  | >>       | Desplazamiento a derecha | `x >> y` |
- 
+
 
 Estos no se pueden aplicar a valores de tipo `float` o `double`.
 
- 
+
 ### Operador `&` (AND)
 
 
@@ -73,14 +73,14 @@ El operador bitwise AND `&` se usa a menudo para enmascarar un conjunto de bits;
 
 ```c
 n = 0b11001100; // n = 1100 1100
-c = n & 0x0F ;  // c = n & 0000 1111 = 0000 1100 
+c = n & 0x0F ;  // c = n & 0000 1111 = 0000 1100
 ```
 
 Este ejemplo establece en cero todos los bits excepto los 4 bits menos significativos de la variable n.
 
 
 > **Nota importante:**
-> 
+>
 > Se debe distinguir cuidadosamente los operadores bitwise (& y |) de los conectivos lógicos (&& y ||), que implican una evaluación de izquierda a derecha de un valor de verdad. Por ejemplo, si `x = 1` e `y = 2`, entonces `x & y = 0`, mientras que `x && y = 1`. (¿Por qué? En C , && evalua que ambos operandos sean distintos de cero. En este caso, el valor de verdad de `x` es `true` y el valor de verdad de `y` es `true`, por lo tanto, `true && true = true`).
 
 
@@ -118,7 +118,7 @@ Este código invierte los bits en x que están en uno en MASK, es decir, los bit
 
 Los operadores de desplazamiento `<<` y `>>` realizan desplazamientos a la izquierda y a la derecha de su operando izquierdo por el número de posiciones de bits dado por el operando derecho.
 
- Así, `x << 2` desplaza `x` a la izquierda dos posiciones, llenando los bits restantes con `0`; esto tambien equivalente a multiplicar por 4. 
+ Así, `x << 2` desplaza `x` a la izquierda dos posiciones, llenando los bits restantes con `0`; esto tambien equivalente a multiplicar por 4.
 
 Por ejemplo:
 
@@ -135,7 +135,7 @@ Por ejemplo:
 x = 0b00011000; // x = 0001 1000, en decimal x = 24
 y = x >> 2;     // y = 0000 0110, en decimal y = 6
 ```
- 
+
 
 
 ### Operador `~` (NOT)
@@ -143,13 +143,5 @@ y = x >> 2;     // y = 0000 0110, en decimal y = 6
 El operador unario `~` produce el complemento a uno de un entero; es decir, convierte cada bit `1` en un bit `0` y viceversa. Este operador se utiliza típicamente en expresiones como
 
 ```c
-x &  ~077  
+x &  ~077
 ```
-
-
-
-
-
-
-
-

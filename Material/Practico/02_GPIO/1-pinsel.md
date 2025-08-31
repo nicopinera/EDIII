@@ -16,7 +16,7 @@ El PINSEL0 está mapeado en la dirección `0x4002C000`.
 | -------- | --------- | ---------------------------------- |
 | PINSEL0  | 0x4002C000 | Registro de selección de pines 0   |
 | PINSEL1  | 0x4002C004 | Registro de selección de pines 1   |
-| …        | …         | …                                  | 
+| …        | …         | …                                  |
 
 [Revisar en las tablas del User Manual Rev 4.1, pagina 117 en adelante]
 
@@ -46,11 +46,11 @@ Si ponemos:
 ---
 
 
-* Cada **registro PINSEL** puede controlar hasta 16 pines (dos bits por pin). 
+* Cada **registro PINSEL** puede controlar hasta 16 pines (dos bits por pin).
 * El valor **después del reset** es siempre `00` → todos los pines como GPIO.
 
 
- 
+
 
 ## **Registros PINMODE**
 
@@ -120,14 +120,14 @@ Si quisieramos configurar estos registros, deberiamos hacer punteros a cada uno 
 
 CMSIS traduce los registros de hardware a estructuras de C fáciles de usar.
 
- 
+
 
 ## **¿Cómo accede CMSIS a los registros?**
 
 En lugar de usar direcciones de memoria como `0x4002C000`, CMSIS define **estructuras de datos** que representan cada periférico del microcontrolador, y luego te permite acceder a ellos mediante punteros predefinidos.
 
 Vamos a analizar el bloque **PINCON**, que maneja los registros PINSEL, PINMODE y PINMODE\_OD.
- 
+
 ### **Definición de la estructura LPC\_PINCON\_TypeDef**
 
 CMSIS define esta estructura en el archivo de cabecera:
@@ -146,7 +146,7 @@ typedef struct {
 
 Cada campo de la estructura representa **un registro de 32 bits** del microcontrolador.
 La palabra clave `__IO` indica que se trata de una variable de **entrada/salida** (*input/output*), es decir, puede ser leída y escrita por el software o el hardware. Es un *macro* que define una variable como **volatile**.
- 
+
 ### **Dirección base y puntero al periférico**
 
 El bloque PINCON comienza en una dirección fija: `0x4002 C000`. CMSIS define un puntero a esa dirección:
@@ -162,8 +162,8 @@ Por ejemplo:
 
 * `LPC_PINCON->PINSEL0` accede al registro PINSEL0.
 * `LPC_PINCON->PINMODE1` accede al registro PINMODE1.
-* `LPC_PINCON->PINMODE_OD0` accede al registro de modo open drain del puerto 0. 
- 
+* `LPC_PINCON->PINMODE_OD0` accede al registro de modo open drain del puerto 0.
+
 
 ---
 
@@ -189,4 +189,4 @@ int main(void) {
         // el periférico UART3 debe configurarse por separado.
     }
 }
-``` 
+```
