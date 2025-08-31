@@ -34,6 +34,11 @@
  *4. Utilice 7 pines GPIO para controlar un display de 7 segmentos.
  *El programa debe mostrar de manera cíclica y automática los
  *16 dígitos hexadecimales (0-F) de forma ascendente.
+ *
+ * 5. Escriba un programa que identifique la presión de un pulsador conectado a un pin GPIO configurado
+ * como entrada. Utiliza otro pin de salida para encender un LED
+ * solo mientras el botón está presionado.
+ *
  */
 
 #ifdef __USE_CMSIS
@@ -75,11 +80,19 @@ int main(void) {
 		//longDelay();
 
 		// Ejercicio 4
-		LPC_GPIO2->FIOCLR = 0x7F; // APAGO TODOS
-		LPC_GPIO2->FIOSET = digits[segmento % 16]; // cargo todo el valor, los bit que no toco se ponen en 0
+		//LPC_GPIO2->FIOCLR = 0x7F; // APAGO TODOS
+		//LPC_GPIO2->FIOSET = digits[segmento % 16]; // cargo todo el valor, los bit que no toco se ponen en 0
+		//segmento++;
+		//shortDelay();
 
-		segmento++;
-		shortDelay();
+		// ejercicio 5
+		uint8_t estado = (LPC_GPIO0->FIOPIN) & 0b1; // TOMO EL PRIMER BIT
+		if (estado == 0) {
+			LPC_GPIO0->FIOSET = (1 << 1); // PRENDE POR ALTO
+
+		} else {
+			LPC_GPIO0->FIOCLR = (1 << 1); // SE APAGA POR BAJO
+		}
 	}
 	return 0;
 }
@@ -100,6 +113,13 @@ void configGPIO() {
 	// Configuracion de los 7 pines del puerto 2
 	LPC_PINCON->PINSEL4 &= ~(0x3FFF); // PRIMEROS 14 BITS EN 0 PARA GPIO
 	LPC_GPIO2->FIODIR |= (0x7F); // LOS PRIMEROS 7 COMO SALIDA
+
+	//configurar P0.0 (ENTRADA) y P0.1 (SALIDA)
+	LPC_PINCON->PINSEL0 &= ~(0xF); // PRIMEROS 4 EN 0
+	LPC_PINCON->PINMODE0 &= ~(0b11); // PULL UP -> SIEMPRE EN 1
+	LPC_GPIO0->FIODIR &= ~(0b1); // p0.0 COMO ENTRADA
+	LPC_GPIO0->FIODIR |= 1 << 1; // P0.1 COMO SALIDA
+
 }
 void shortDelay() {
 	for (uint32_t i = 0; i < DELAY_TIME; i++) {
