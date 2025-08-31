@@ -1,0 +1,69 @@
+typedef enum {
+    ESTADO_REPOSO,      // Esperando que presionen el botón
+    ESTADO_REBOTE_PRESS,// Detectó presión, esperando fin de rebote
+    ESTADO_PRESIONADO,  // Botón estabilizado en presión
+    ESTADO_REBOTE_RELEASE // Detectó liberación, esperando fin de rebote
+} estado_boton_t;
+
+#define DEBOUNCE_DELAY 50 // tiempo en ms
+
+estado_boton_t maquinaBoton(uint8_t estado_actual, uint32_t *tiempo_anterior) {
+    static estado_boton_t estado = ESTADO_REPOSO;
+    static uint32_t tiempo_inicio = 0;
+    uint32_t tiempo_actual = obtenerTiempoMS(); // Necesitas un timer
+
+    switch(estado) {
+        case ESTADO_REPOSO:
+            if(estado_actual == 0) { // Botón presionado
+                estado = ESTADO_REBOTE_PRESS;
+                tiempo_inicio = tiempo_actual;
+            }
+            break;
+
+        case ESTADO_REBOTE_PRESS:
+            if(tiempo_actual - tiempo_inicio >= DEBOUNCE_DELAY) {
+                if(estado_actual == 0) {
+                    estado = ESTADO_PRESIONADO;
+                    return 1; // ¡Botón presionado válido!
+                } else {
+                    estado = ESTADO_REPOSO;
+                }
+            }
+            break;
+
+        case ESTADO_PRESIONADO:
+            if(estado_actual == 1) { // Botón liberado
+                estado = ESTADO_REBOTE_RELEASE;
+                tiempo_inicio = tiempo_actual;
+            }
+            break;
+
+        case ESTADO_REBOTE_RELEASE:
+            if(tiempo_actual - tiempo_inicio >= DEBOUNCE_DELAY) {
+                estado = ESTADO_REPOSO;
+            }
+            break;
+    }
+
+    return 0;
+}
+
+int main(void) {
+    configGPIO();
+    configTimer(); // Configurar un timer para tiempo
+
+    uint32_t segmento = 0;
+    uint32_t tiempo_anterior = 0;
+
+    while(1) {
+        uint8_t estado_boton = (LPC_GPIO0->FIOPIN & 1);
+        uint32_t tiempo_actual = obtenerTiempoMS();
+
+        if(maquinaBoton(estado_boton, &tiempo_actual)) {
+            // Solo entra aquí cuando hay una pulsación válida
+            LPC_GPIO2->FIOCLR = 0x7F;
+            LPC_GPIO2->FIOSET = digits[segmento % 16];
+            segmento++;
+        }
+    }
+}
