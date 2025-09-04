@@ -1,6 +1,10 @@
 # Prerequisites
 *.d
 *.vscode
+*.idea
+*/.idea
+*.settings
+
 # Object files
 *.o
 *.ko

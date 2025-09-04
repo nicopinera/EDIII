@@ -1,5 +1,6 @@
 /* CLASES PRACTICAS DE GALLARDO
- *
+ * 
+ * Se puede habilitar la interrupcion por ambos flancos en GPIO
  */
 
 #ifdef __USE_CMSIS
@@ -8,11 +9,11 @@
 
 #include <cr_section_macros.h>
 
-int main(void)
-{
+int main(void) {
+	SystemInit();
 
-    while (1)
-    {
-    }
-    return 0;
+	while (1) {
+
+	}
+	return 0;
 }
