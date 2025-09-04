@@ -1,5 +1,5 @@
 /* CLASES PRACTICAS DE GALLARDO
- * 
+ *
  * Se puede habilitar la interrupcion por ambos flancos en GPIO
  */
 

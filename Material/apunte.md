@@ -1,4 +1,8 @@
-## Clase 4/9
+# Apuntes clases Practicas
+
+## Clases Gallardo
+
+### Clase 4/9
 
 - Se puede activar la interrupcion por ambos flancos cuando la interrupcion es por GPIO
 
