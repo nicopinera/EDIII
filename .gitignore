@@ -4,6 +4,7 @@
 *.idea
 */.idea
 *.settings
+venv
 
 # Object files
 *.o
