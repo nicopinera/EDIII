@@ -1,8 +1,8 @@
-## ¿Qué es el SysTick?
+# ¿Qué es el SysTick?
 
 El **System Tick Timer** (SysTick) es un temporizador especial integrado en el procesador ARM Cortex-M3. Puede generar interrupciones regulares que son muy útiles para sistemas operativos y aplicaciones que necesitan ejecutar tareas periódicamente.
 
-### Características principales
+## Características principales
 
 - **Intervalos de tiempo de 10 milisegundos** (configurable)
 - **Vector de excepción dedicado**
@@ -42,7 +42,6 @@ El SysTick funciona como un **contador regresivo**:
 4. Automáticamente se recarga con el valor de `STRELOAD` y vuelve a empezar
 
 > **Tip**: El valor por defecto está configurado para generar interrupciones cada 10ms cuando el CPU funciona a 100MHz.
-
 > **Nota**: La frecuencia máxima del reloj externo es 1/4 de la frecuencia del CPU.
 
 ---
@@ -109,7 +108,7 @@ Para configurar el SysTick para **10 milisegundos** de intervalo:
 
 ### Ejemplo 1: CPU a 100MHz
 
-```
+```python
 Frecuencia CPU = 100,000,000 Hz
 Tiempo deseado = 0.01 segundos (10ms)
 
@@ -119,7 +118,7 @@ STRELOAD = (100,000,000 / 100) - 1 = 999,999 = 0xF423F
 
 ### Ejemplo 2: CPU a 80MHz
 
-```
+```python
 Frecuencia CPU = 80,000,000 Hz
 Tiempo deseado = 0.01 segundos (10ms)
 
@@ -128,7 +127,7 @@ STRELOAD = (80,000,000 / 100) - 1 = 799,999 = 0xC34FF
 
 ### Ejemplo 3: CPU a 4MHz (oscilador interno)
 
-```
+```python
 Frecuencia CPU = 4,000,000 Hz
 Tiempo deseado = 0.01 segundos (10ms)
 
@@ -137,7 +136,7 @@ STRELOAD = (4,000,000 / 100) - 1 = 39,999 = 0x9C3F
 
 ### Ejemplo 4: Reloj externo a 32.768 kHz
 
-```
+```python
 Frecuencia STCLK = 32,768 Hz
 Tiempo deseado = 0.01 segundos (10ms)
 

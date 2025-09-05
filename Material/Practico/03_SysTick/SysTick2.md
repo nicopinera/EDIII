@@ -31,7 +31,7 @@ Este programa para **LPC1769** demuestra el uso del timer SysTick en conjunto co
 
 ### Patrón de Onda
 
-```
+```c
 Patrón: 0xAA = 10101010 (binario)
 Frecuencia: 10 Hz (100ms por bit)
 Secuencia: ON-OFF-ON-OFF-ON-OFF-ON-OFF (se repite)
