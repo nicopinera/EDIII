@@ -13,8 +13,7 @@
 
 #include <cr_section_macros.h>
 
-
-int main3(void){
-	SystemInit();
-	return 0;
+int main3(void) {
+  SystemInit();
+  return 0;
 }

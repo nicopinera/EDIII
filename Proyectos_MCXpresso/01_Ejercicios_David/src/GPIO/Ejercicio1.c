@@ -11,5 +11,6 @@
  * Si tenemos el pin P1.8
  * Tendriamos que seleccionar entre el PINSEL2 O PINSEL3 (PINMODE2 O PINMODE3)
  * Como el pin es el 8, es menor a a 15 seleccionamos PINSEL2 (PINMODE2)
- * Los bit que tendremos que modificar son el 16 y 17 del registro PINSEL2 Y PINMODE2
+ * Los bit que tendremos que modificar son el 16 y 17 del registro PINSEL2 Y
+ * PINMODE2
  */

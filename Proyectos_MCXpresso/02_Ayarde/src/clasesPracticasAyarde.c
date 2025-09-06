@@ -8,11 +8,9 @@
 
 #include <cr_section_macros.h>
 
-int main(void)
-{
+int main(void) {
 
-    while (1)
-    {
-    }
-    return 0;
+  while (1) {
+  }
+  return 0;
 }
