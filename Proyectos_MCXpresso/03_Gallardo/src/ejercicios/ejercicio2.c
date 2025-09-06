@@ -13,7 +13,7 @@
 volatile uint8_t lectura = 0;   // para leer el buffer
 volatile uint8_t escritura = 0; // escribir el buffer
 
-uint8_t *buffer(uint8_t *) 0x2007C000;
+uint8_t *buffer = (uint8_t *)0x2007C000;
 
 void configGPIO() {
   /*

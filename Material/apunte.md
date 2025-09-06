@@ -4,6 +4,13 @@
 
 ### Repaso programacion en C
 
+La programacion es una serie de pasos que el programador debe seguir
+
+1. Diseño del algoritmo
+2. Codificacion
+3. Compilacion
+4. Ejecucion
+
 ## Clases Gallardo
 
 ### Clase 1 (Grabada)
