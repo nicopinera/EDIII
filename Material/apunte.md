@@ -150,3 +150,46 @@ SystemInit(); // COnfigura el CClock en 100MHz (frecuencia del core)
 
   // SI quiero que interrumpa cada 20 Hz, el tiempo es 1/20 = 50ms
 ```
+
+### Parcial 1 - 2025
+
+El primer ejercicio la forma de la señal se puede guardar en una variable e ir mostrando cada vez que se interrumpe. Con eso te evita controlar los if
+
+```c
+#define sequence_length = (sizeof(sequence)/sizeof(uint8_t)) // largo de la secuencia
+```
+
+El segundo ejercicio era por flanco, no por nivel.
+
+**Timer**: cada timer tiene el Tc (contador) y PR (pre scaler). Todos son de 32 bits. La LPC tiene 4 timers. Los pre scaler tambien son de 32 bits.
+
+$$T_{interrupcion} = ((V_{valorTimerMax}-V_{preCargado})*PR+1)*T_{clock}= ((2^{32}-V_{precargado})*PR+1)*T_{clock}$$
+
+Hay 4 registros **MATCH**, cuando **TC==MATCH** puedo hacer que interrumpa, o que se resetee el contador, o ambas.
+
+Tenemos 4 timer que tienen la misma estructura de registros
+
+- PR: Almacena el valor del pre scaler
+- PC: Se incrementa en cada pulso de clock, cuando alcanza el valor de PR, vuelve a 0 y se aumenta el TC
+- TC: Contador
+- TCR: Registro de control
+- CTCR: Count Control Register
+- MCR: Match control register, configuracion de los match
+- IR: Interrupt Register
+- EMR: External Match Register
+
+1. PONER VALOR EN `LPC_TIMx->CTCR`
+2. DEFINIR `LPC_TIMx->PR`
+3. CARGAR EN MATCH REGISTER SI ES NECESARIO
+4. CARGAR EL VALOR EN `LPC_TIMx->MCR` SI USAS MATCH
+
+En los timer se utilizan los periferical clock **PCLOCK**, sale del clock del core dividido, puede dividirse por /4, /2, que no divida y /8 . El Timer del sistema por default esta en $100 [MHz]$ lo que corresponde a $0.01[\mu s]$ cada tick del clock. Podes configurar que cuando timer llegue a determinado valor, interrumpa a traves de los registros match.
+
+Puede interrumpir por match o por capture, para cualquiera le das dos hay que habilitar la interrupcion general del timer. Capture, captura un flanco ascendente o descendente e interrumpe. 
+
+> Perido: Entre dos flancos ascendentes
+> Duty cicly: Entre un flanco ascendente y otro descendente
+
+### Drivers
+
+Hay que crear instancias de estructuras, las cuales despues se pasan por referencia (&) a una funcion para configurar.
