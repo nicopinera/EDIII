@@ -199,3 +199,13 @@ Valores posibles:
 ## 6. Drivers
 
 Se deben crear instancias de estructuras, que luego se pasan por referencia (`&`) a funciones de configuración.
+
+---
+
+## 7. ADC
+
+- Resolucion: 12 bits
+- Rango de 3.3 [v] a GND
+- El clock maximo es de 13 [MHz] que deriva del PCLOCK = CCLOCK/4 | CCLOCK | CCLOCK/2 | CCLOCK/8
+- Convierte a  200 [KHz]
+- Tiene 8 canales de conversion. Que dividen la frecuencia de conversion por la cantidad de canales habilitados
