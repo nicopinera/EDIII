@@ -1,9 +1,8 @@
-# **GPIO**
-Los **GPIO** (*General Purpose Input/Output*) permiten usar los pines del microcontrolador como entradas o salidas digitales para interactuar con el mundo exterior: sensores, LEDs, botones, relés, etc.
+# GPIO
 
+Los **GPIO** (_General Purpose Input/Output_) permiten usar los pines del microcontrolador como entradas o salidas digitales para interactuar con el mundo exterior: sensores, LEDs, botones, relés, etc.
 
-
-### La configuración de los GPIO requiere considerar:
+## La configuración de los GPIO requiere considerar
 
 1. **Power (energía)**:
    El bloque GPIO está **siempre alimentado**, no es necesario activarlo manualmente.
@@ -23,28 +22,24 @@ Los **GPIO** (*General Purpose Input/Output*) permiten usar los pines del microc
 
 ### **Características destacadas**
 
-* GPIO acelerado por hardware:
+- GPIO acelerado por hardware:
 
-  * Registros ubicados en un **bus AHB** para acceso rápido.
-  * **Registros de máscara (FIOMASK)** para modificar solo ciertos bits sin afectar el resto.
-  * Accesibles por byte, half-word (16 bits) o word (32 bits).
-  * Posibilidad de escribir un valor completo de puerto en una sola instrucción.
+  - Registros ubicados en un **bus AHB** para acceso rápido.
+  - **Registros de máscara (FIOMASK)** para modificar solo ciertos bits sin afectar el resto.
+  - Accesibles por byte, half-word (16 bits) o word (32 bits).
+  - Posibilidad de escribir un valor completo de puerto en una sola instrucción.
 
-* Compatible con DMA:
+- Compatible con DMA:
 
-  * Los registros pueden ser accedidos por el controlador **GPDMA**, permitiendo enviar o recibir datos sincronizados con eventos de GPIO sin intervención del CPU.
+  - Los registros pueden ser accedidos por el controlador **GPDMA**, permitiendo enviar o recibir datos sincronizados con eventos de GPIO sin intervención del CPU.
 
-* **Bit-banding (ARM Cortex-M3)**:
+- **Bit-banding (ARM Cortex-M3)**:
 
-  * Permite acceso directo a bits individuales como si fueran variables.
+  - Permite acceso directo a bits individuales como si fueran variables.
 
-* Todos los pines **inician como entradas con pull-up activado** después del reset.
+- Todos los pines **inician como entradas con pull-up activado** después del reset.
 
 ---
-
-
-
-
 
 ## **¿Qué registros controlan los GPIOs?**
 
@@ -65,11 +60,11 @@ Los GPIO se configuran y controlan usando los siguientes registros:
 
 La LPC1769 ofrece hasta **5 puertos GPIO**:
 
-* **P0, P1, P2, P3, P4**
-* Cada puerto puede tener hasta 32 pines (`P0.0` a `P0.31`, etc.)
-* No todos los pines están disponibles físicamente en todos los encapsulados.
+- **P0, P1, P2, P3, P4**
+- Cada puerto puede tener hasta 32 pines (`P0.0` a `P0.31`, etc.)
+- No todos los pines están disponibles físicamente en todos los encapsulados.
 
-### Tabla resumen:
+### Tabla resumen
 
 | Puerto | Pines disponibles |
 | ------ | ----------------- |
@@ -120,8 +115,8 @@ LPC_GPIO0->FIODIR |= (1 << 22);   // P0.22 como salida
 
 ## **6. FIOSET y FIOCLR – Salida digital**
 
-* `FIOSET`: pone en alto (1) los bits que se escriben como 1. No afecta los demás.
-* `FIOCLR`: pone en bajo (0) los bits que se escriben como 1. No afecta los demás.
+- `FIOSET`: pone en alto (1) los bits que se escriben como 1. No afecta los demás.
+- `FIOCLR`: pone en bajo (0) los bits que se escriben como 1. No afecta los demás.
 
 **Ejemplo:**
 
@@ -136,8 +131,8 @@ LPC_GPIO0->FIOCLR = (1 << 22);  // Pone P0.22 en bajo
 
 Este registro permite:
 
-* Leer el estado de los pines
-* Escribir un valor completo al puerto (cuando se desea modificar todos los bits a la vez)
+- Leer el estado de los pines
+- Escribir un valor completo al puerto (cuando se desea modificar todos los bits a la vez)
 
 **Ejemplo:**
 
@@ -152,8 +147,8 @@ int pin13 = (valor >> 13) & 1;          // Extraigo valor de P2.13
 
 Este registro permite **ignorar bits** al hacer lectura o escritura en `FIOPIN`, `FIOSET` o `FIOCLR`.
 
-* Bit = 1 → ignorado
-* Bit = 0 → activo
+- Bit = 1 → ignorado
+- Bit = 0 → activo
 
 Útil para modificar varios bits sin afectar otros.
 
@@ -161,13 +156,13 @@ Este registro permite **ignorar bits** al hacer lectura o escritura en `FIOPIN`,
 
 ## **9. Interrupciones en GPIO** (se profundiza en la sección de interrupciones)
 
-* Solo **puertos P0 y P2** pueden generar interrupciones.
-* Se puede detectar flancos ascendentes, descendentes o ambos.
-* Los registros involucrados son:
+- Solo **puertos P0 y P2** pueden generar interrupciones.
+- Se puede detectar flancos ascendentes, descendentes o ambos.
+- Los registros involucrados son:
 
-  * `IO0IntEnR`, `IO0IntEnF` → habilitan interrupción por flanco
-  * `IO0IntStatR`, `IO0IntStatF` → indican si ocurrió un evento
-  * `IO0IntClr` → limpia la interrupción
+  - `IO0IntEnR`, `IO0IntEnF` → habilitan interrupción por flanco
+  - `IO0IntStatR`, `IO0IntStatF` → indican si ocurrió un evento
+  - `IO0IntClr` → limpia la interrupción
 
 **Ejemplo de activación por flanco ascendente en P0.10:**
 
@@ -179,18 +174,16 @@ LPC_GPIOINT->IO0IntEnR |= (1 << 10);  // Habilita interrupción por flanco ascen
 
 ## **10. Estado tras el reset**
 
-* Todos los pines están como **entradas** con **pull-up activado**.
-* Se requiere configurar tanto PINSEL (función), PINMODE (resistencia), como FIODIR (dirección) antes de usar.
-
+- Todos los pines están como **entradas** con **pull-up activado**.
+- Se requiere configurar tanto PINSEL (función), PINMODE (resistencia), como FIODIR (dirección) antes de usar.
 
 ---
+
 ## Ejemplo de código
 
 Encender los 3 leds RGB de la placa LPC1769.
 
-<img src="./img/rgb.png" width="50%">
-
-### Pines utilizados:
+### Pines utilizados
 
 | Color del LED | Pin MCU | Puerto | Número de bit |
 | ------------- | ------- | ------ | ------------- |
@@ -198,8 +191,8 @@ Encender los 3 leds RGB de la placa LPC1769.
 | Verde         | `P3.25` | P3     | 25            |
 | Azul          | `P3.26` | P3     | 26            |
 
-* Los cátodos (negativos) de los LEDs están conectados a los pines del MCU.
-* El ánodo está conectado a +3.3V → **los LEDs se encienden cuando el pin MCU está en nivel bajo (0 lógico)**.
+- Los cátodos (negativos) de los LEDs están conectados a los pines del MCU.
+- El ánodo está conectado a +3.3V → **los LEDs se encienden cuando el pin MCU está en nivel bajo (0 lógico)**.
 
 > Entonces: para **prender un LED**, se debe escribir un **0 en el pin** correspondiente. Para **apagarlo**, un **1**.
 
@@ -207,8 +200,8 @@ Encender los 3 leds RGB de la placa LPC1769.
 
 ## Objetivo del programa
 
-* Inicializar los pines como **GPIO salida**.
-* Encender uno o más LEDs, por ejemplo: rojo encendido, verde y azul apagados.
+- Inicializar los pines como **GPIO salida**.
+- Encender uno o más LEDs, por ejemplo: rojo encendido, verde y azul apagados.
 
 ---
 
@@ -271,6 +264,5 @@ int main(void) {
 ---
 
 ## Desafío
-
 
 Hacer un desarrollo que simule el funcionamiento de un semáforo.
