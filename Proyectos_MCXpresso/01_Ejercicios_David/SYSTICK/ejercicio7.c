@@ -103,6 +103,7 @@ void SysTick_Handler(void) {
 
 int main(void) {
 	SystemInit();
+    configEINT();
 	configPUERTOS();
 	configSYSTICK();
 
