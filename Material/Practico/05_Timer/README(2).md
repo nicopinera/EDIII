@@ -4,7 +4,7 @@
 
 Desarrollar un sistema básico de monitoreo para una línea de producción que cuente productos y detecte problemas comunes. El sistema usará los Timers en modo COUNTER para contar pulsos de sensores.
 
-### Requerimientos Funcionales  
+### Requerimientos Funcionales
 
 #### 1. **Conteo de Productos** (Funcionalidad Principal):
    - **Timer0 en modo COUNTER**: Contar productos que pasan por el sensor (CAP0.0)
@@ -83,7 +83,7 @@ typedef struct {
     uint32_t timeout_segundos;  // Timeout línea detenida
 } system_config_t;
 ```
- 
+
 ### Ejemplo de Operación
 
 1. **Inicio**:
@@ -109,4 +109,3 @@ typedef struct {
    - Contador llega a 100
    - LED azul se enciende
    - Sistema espera reset o nuevo lote
- 

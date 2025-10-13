@@ -51,7 +51,7 @@ typedef struct {
 #define SENSOR_GOLPE    EINT0    // P2.10 - Entrada de golpes
 #define BTN_MODO        P2.11    // Cambiar NORMAL/GRABAR
 #define LED_VERDE       P0.22    // Acceso OK
-#define LED_ROJO        P0.21    // Acceso denegado  
+#define LED_ROJO        P0.21    // Acceso denegado
 #define LED_AMARILLO    P0.20    // Modo grabación
 #define RELE_PUERTA     P0.19    // Salida principal
 #define BUZZER          P0.18    // Feedback auditivo
@@ -130,4 +130,3 @@ IDLE → CAPTURANDO → PROCESANDO → RESULTADO
 
 
 --
- 
